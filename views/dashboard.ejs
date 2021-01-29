@@ -2,140 +2,38 @@
 
 
 
-
-<!-- <form>
-  <div class="container col-md-"></div>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="Faculty">Faculty</label>
-      <select id="faculty" class="form-control">
-        <option selected>Faculty</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-        <option>...</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group col-md-4">
-    <label for="Department">State</label>
-    <select id="department" class="form-control">
-      <option selected>Department</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-      <option>...</option>
-    </select>
-  </div>
-
-  <div class="form-group col-md-6">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>department</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-  </div>
-
-  <div class="form-group col-md-6">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>Department</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select> 
-  </div>
-
- -->
-
-
-<!-- 
-  <form>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Password</label>
-        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
-
- -->
-
-
  <div class="container">
 	<div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
-          <form class="form-horizontal" action="" method="post">
+
+          <form method="POST" action="/dashboard" class="form-horizontal"  >
           <fieldset>
-            <legend class="text-center">Contact us</legend>
+            <legend class="text-center">Send Message</legend>
     
-            <!-- Name input-->
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name">Name</label>
-              <div class="col-md-9">
-                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
-              </div>
+           <!-- Recipient -->
+           <div class="form-group">
+            <label class="col-md-3 control-label" for="message">Recipient</label>
+            <div class="col-md-9">
+              <textarea class="form-control" id="message" name="message" placeholder="Enter | Browse | Paste recipients here" rows="5"></textarea>
             </div>
-    
+          </div>
+            
+          <!-- File upload input-->
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="Sender">Sender</label>
+            <div class="col-md-9">
+              <input type="file" id="myFile" name="filename">
+            </div>
+          </div>
+
+        
+          
             <!-- Email input-->
             <div class="form-group">
-              <label class="col-md-3 control-label" for="email">Your E-mail</label>
+              <label class="col-md-3 control-label" for="Sender">Sender</label>
               <div class="col-md-9">
-                <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
+                <input id="email" name="sender" type="text" class="form-control">
               </div>
             </div>
     
@@ -146,11 +44,11 @@
                 <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
               </div>
             </div>
-    
+
             <!-- Form actions -->
             <div class="form-group">
               <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                <button type="submit" class="btn btn-primary btn-lg">Send</button>
               </div>
             </div>
           </fieldset>
@@ -159,26 +57,5 @@
       </div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <%- include ('partials/footer') %>
