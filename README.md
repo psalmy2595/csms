@@ -7,7 +7,13 @@
 
 ## Getting started
 
-####Admin Login 
+# URS`S
 
- Email = ....................
-Password = ....................
+    Login
+    http://localhost:3000/
+
+    Register
+    http://localhost:3000/register
+
+    Dashboard
+    http://localhost:3000/dashboard
