@@ -4,7 +4,7 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: 50,
@@ -22,7 +22,6 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save', function (next) {
   var user = this;
-
   if (user.isModified('password')) {
     // console.log('password changed')
     bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -69,6 +68,8 @@ userSchema.statics.findByToken = function (token, cb) {
     });
   });
 };
+
+
 
 const User = mongoose.model('User', userSchema);
 
