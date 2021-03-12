@@ -65,12 +65,15 @@ router.post("/login", function (req, res) {
 router.post("/dashboard", function (req, res) {
   const { message, sender, recipient } = req.body;
 
-  const recipientDigitsArray = recipient.split("");
-  recipientDigitsArray.shift();
-  recipientDigitsArray.unshift("2", "3", "4");
-  recipientDigitsArray.join("");
-
-  const processedNumber = recipientDigitsArray.join("");
+  const splitedRecipients = recipient.split(',').map(item => {
+    const recipientDigitsArray = item.split("");
+    recipientDigitsArray.shift();
+    recipientDigitsArray.unshift("2", "3", "4");
+    
+    return {
+      msidn: recipientDigitsArray.join("")
+    };
+  })
 
   const options = {
     data: {
@@ -85,11 +88,7 @@ router.post("/dashboard", function (req, res) {
           flash: "0",
         },
         recipients: {
-          gsm: [
-            {
-              msidn: processedNumber,
-            },
-          ],
+          gsm: splitedRecipients,
         },
       },
     },
@@ -109,10 +108,6 @@ router.post("/dashboard", function (req, res) {
       }
     })
     .catch((error) => {
-      console.log(
-        "🚀 ~ file: index.js ~ line 93 ~ axios ~ error",
-        error.message
-      );
       res.render("error", { error, returnUrl: "/dashboard" });
     });
 });
