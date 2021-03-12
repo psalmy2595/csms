@@ -21,6 +21,13 @@ router.get("/login", function (req, res) {
   res.render("login");
 });
 
+router.get("/sent", function (req, res) {
+  res.render("sent");
+});
+
+router.get("/error", function (req, res) {
+  res.render("error", {error: null, returnUrl: '/dashboard'});
+});
 //Post requests
 router.post("/register", function (req, res) {
   const reg = new User({
@@ -57,7 +64,6 @@ router.post("/login", function (req, res) {
 
 router.post("/dashboard", function (req, res) {
   const { message, sender, recipient } = req.body;
-  console.log("🚀 ~ file: index.js ~ line 61 ~ req.body", req.body);
 
   const recipientDigitsArray = recipient.split("");
   recipientDigitsArray.shift();
@@ -97,7 +103,7 @@ router.post("/dashboard", function (req, res) {
       const status = res.data.response.status;
 
       if (status === "SUCCESS") {
-        console.log("success");
+        res.redirect("/sent");
       } else {
         throw new Error(`Unable to send message - Reason: ${status}`);
       }
@@ -107,9 +113,8 @@ router.post("/dashboard", function (req, res) {
         "🚀 ~ file: index.js ~ line 93 ~ axios ~ error",
         error.message
       );
+      res.render("error", { error, returnUrl: "/dashboard" });
     });
-
-  res.redirect("/dashboard");
 });
 
 router.get("/logout", function (req, res) {
