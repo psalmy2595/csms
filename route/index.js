@@ -56,9 +56,15 @@ router.post("/login", function (req, res) {
 });
 
 router.post("/dashboard", function (req, res) {
-  const { message, sender, recipient } = req.body
+  const { message, sender, recipient } = req.body;
   console.log("🚀 ~ file: index.js ~ line 61 ~ req.body", req.body);
-  // send the message here, when you get a response, show the response;
+
+  const recipientDigitsArray = recipient.split("");
+  recipientDigitsArray.shift();
+  recipientDigitsArray.unshift("2", "3", "4");
+  recipientDigitsArray.join("");
+
+  const processedNumber = recipientDigitsArray.join("");
 
   const options = {
     data: {
@@ -75,7 +81,7 @@ router.post("/dashboard", function (req, res) {
         recipients: {
           gsm: [
             {
-              msidn: recipient,
+              msidn: processedNumber,
             },
           ],
         },
@@ -90,17 +96,20 @@ router.post("/dashboard", function (req, res) {
     .then((res) => {
       const status = res.data.response.status;
 
-      if (status === 'SUCCESS') {
-        console.log('success')
+      if (status === "SUCCESS") {
+        console.log("success");
       } else {
-        throw new Error(`Unable to send message - Reason: ${status}`)
+        throw new Error(`Unable to send message - Reason: ${status}`);
       }
     })
     .catch((error) => {
-      console.log("🚀 ~ file: index.js ~ line 93 ~ axios ~ error", error.message);
+      console.log(
+        "🚀 ~ file: index.js ~ line 93 ~ axios ~ error",
+        error.message
+      );
     });
 
-    res.redirect('/dashboard');
+  res.redirect("/dashboard");
 });
 
 router.get("/logout", function (req, res) {
