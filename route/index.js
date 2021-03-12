@@ -2,6 +2,7 @@ const express = require("express");
 const { auth } = require("../middleware/auth");
 const { User } = require("../models/user");
 const axios = require("axios");
+const { smsApiUsername, smsApiKey } = require("../config");
 
 const router = express.Router();
 
@@ -79,8 +80,8 @@ router.post("/dashboard", function (req, res) {
     data: {
       SMS: {
         auth: {
-          username: "olatunjiyakub99@gmail.com",
-          apikey: "f338d58a940ea765f2c8c35a44e156b7540fb8fd",
+          username: smsApiUsername,
+          apikey: smsApiKey,
         },
         message: {
           sender: sender,
