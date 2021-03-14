@@ -99,8 +99,8 @@ router.post("/dashboard", function (req, res) {
   };
 
   axios(options)
-    .then((res) => {
-      const status = res.data.response.status;
+    .then((response) => {
+      const status = response.data.response.status;
 
       if (status === "SUCCESS") {
         res.redirect("/sent");
