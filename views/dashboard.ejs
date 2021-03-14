@@ -2,60 +2,63 @@
 
 
 
- <div class="container">
-	<div class="row">
+  <div class="container">
+    <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
 
-          <form method="POST" action="/dashboard" class="form-horizontal"  >
-          <fieldset>
-            <legend class="text-center">Send Message</legend>
-    
-           <!-- Recipient -->
-           <div class="form-group">
-            <label class="col-md-3 control-label" for="message">Recipient</label>
-            <div class="col-md-9">
-              <textarea class="form-control" id="message" name="message" placeholder="Enter | Browse | Paste recipients here" rows="5"></textarea>
-            </div>
-          </div>
-            
-          <!-- File upload input-->
-          <div class="form-group">
+          <form method="POST" action="/dashboard" class="form-horizontal">
+            <fieldset>
+              <legend class="text-center">Send Message</legend>
+
+              <!-- Recipient -->
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="recipient">Recipient</label>
+                <div class="col-md-9">
+                  <textarea class="form-control" id="recipient" name="recipient"
+                    placeholder="Please Enter phone number seperated by comma without spaces e.g 08123456789,09012345678"
+                    rows="5"></textarea>
+                </div>
+              </div>
+
+              <!-- File upload input-->
+              <!-- <div class="form-group">
             <label class="col-md-3 control-label" for="Sender">Sender</label>
             <div class="col-md-9">
               <input type="file" id="myFile" name="filename">
             </div>
-          </div>
+          </div> -->
 
-        
-          
-            <!-- Email input-->
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="Sender">Sender</label>
-              <div class="col-md-9">
-                <input id="email" name="sender" type="text" class="form-control">
-              </div>
-            </div>
-    
-            <!-- Message body -->
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="message">Your message</label>
-              <div class="col-md-9">
-                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
-              </div>
-            </div>
 
-            <!-- Form actions -->
-            <div class="form-group">
-              <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-primary btn-lg">Send</button>
+
+              <!-- Email input-->
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="Sender">Sender</label>
+                <div class="col-md-9">
+                  <input id="email" name="sender" type="text" class="form-control" placeholder="Name">
+                </div>
               </div>
-            </div>
-          </fieldset>
+
+              <!-- Message body -->
+              <div class="form-group">
+                <label class="col-md-3 control-label" for="message">Your message</label>
+                <div class="col-md-9">
+                  <textarea class="form-control" id="message" name="message"
+                    placeholder="Please enter your message here..." rows="5"></textarea>
+                </div>
+              </div>
+
+              <!-- Form actions -->
+              <div class="form-group">
+                <div class="col-md-12 text-right">
+                  <button type="submit" class="btn btn-primary btn-lg">Send</button>
+                </div>
+              </div>
+            </fieldset>
           </form>
         </div>
       </div>
-	</div>
-</div>
+    </div>
+  </div>
 
-<%- include ('partials/footer') %>
+  <%- include ('partials/footer') %>
