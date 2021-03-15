@@ -4,13 +4,13 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const routes = require('./route/index');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const config = require("./config");
 
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect(
-  // "mongodb+srv://psalmy2595:linuxinside@cluster0-6k5rx.mongodb.net/sms?retryWrites=true&w=majority",
-  "mongodb://localhost/csms",
+ config.dbUrl,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

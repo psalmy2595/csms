@@ -48,6 +48,7 @@ router.post("/register", function (req, res) {
 router.post("/login", function (req, res) {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) return res.status(400).json(err);
+    if(!user) return res.status(400).json({ message: 'user does not exist' })
 
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch) return res.status(400).send("Error", err);
