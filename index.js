@@ -30,5 +30,5 @@ app.use('/', routes);
 
 
 app.listen(PORT, function () {
-  console.log("NEW SMS PORTAL By Psalmyjay, SERVER STARTED ON PORT 3000");
+  console.log("NEW SMS PORTAL, SERVER STARTED ON PORT 3000");
 });
