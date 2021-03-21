@@ -7,19 +7,19 @@ const { smsApiUsername, smsApiKey } = require("../config");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-  res.render("login");
+  res.redirect('/login')
 });
 
 router.get("/register", function (req, res) {
-  res.render("register");
+  res.render("register", { successMessage: req.flash('success'), errorMessage: req.flash('error') });
 });
 
 router.get("/dashboard", auth, function (req, res) {
-  res.render("dashboard");
+  res.render("dashboard", { successMessage: req.flash('success'), errorMessage: req.flash('error') } );
 });
 
 router.get("/login", function (req, res) {
-  res.render("login");
+  res.render("login", { successMessage: req.flash('success'), errorMessage: req.flash('error') } );
 });
 
 router.get("/sent", function (req, res) {
@@ -31,36 +31,57 @@ router.get("/error", function (req, res) {
 });
 //Post requests
 router.post("/register", function (req, res) {
-  const reg = new User({
-    email: req.body.email,
-    password: req.body.password,
-    name: req.body.name,
-  });
-
-  reg.save((err, user) => {
-    if (err) {
-      return res.send("Check User Information");
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (user) {
+      req.flash("error", "User with the provided email already exists");
+      return res.redirect('/register')
+    } else {
+      const reg = new User({
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.name,
+      });
+    
+      reg.save((err, user) => {
+        if (err) {
+          req.flash("error", err.message)
+          res.redirect('/register')
+        } else {
+          req.flash('success', 'Please sign in with your new credentials')
+          res.redirect("/login");
+        }
+      });
     }
-    return res.redirect("login");
-  });
+  })
 });
+
 
 router.post("/login", function (req, res) {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) return res.status(400).json(err);
-    if(!user) return res.status(400).json({ message: 'user does not exist' })
-
-    user.comparePassword(req.body.password, (err, isMatch) => {
-      if (!isMatch) return res.status(400).send("Error", err);
-      // // Generate token on login
-      user.generateToken((err, tok) => {
-        if (err) return res.status(400).send(err);
-        res.cookie("w_authExp", tok.tokenExp);
-        res.cookie("w_auth", tok.token);
-        console.log("success");
-        res.redirect("dashboard");
+    if (!user) {
+      req.flash('error', 'Invalid email or password');
+      res.redirect("/login")
+    } else {
+      user.comparePassword(req.body.password, (err, isMatch) => {
+        if (!isMatch) {
+          req.flash('error', 'Invalid email or password')
+          return res.redirect('/login')
+        }
+        // // Generate token on login
+        user.generateToken((err, tok) => {
+          if (err) {
+            req.flash('error', "Unable to sign in, please try again")
+            res.redirect('/login')
+          };
+          res.cookie("w_authExp", tok.tokenExp);
+          res.cookie("w_auth", tok.token);
+          console.log("success");
+          res.redirect("dashboard");
+        });
       });
-    });
+    }
+
   });
 });
 

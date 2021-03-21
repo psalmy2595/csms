@@ -1,6 +1,12 @@
 <%- include ('partials/navbar') %>
 
 <div class="container mt-5">
+  <% if(errorMessage.length > 0){ %>
+    <%- include('./partials/errorMessage'); %>
+  <% } %>
+  <% if(successMessage.length > 0){ %>
+    <%- include('./partials/successMessage'); %>
+  <% } %>
     <h1>Register Here</h1>
     <form method="POST" action="/register" autocomplete="off">
         <div class="form-group">
