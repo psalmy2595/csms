@@ -125,13 +125,15 @@ router.post("/dashboard", function (req, res) {
       const status = response.data.response.status;
 
       if (status === "SUCCESS") {
-        res.redirect("/sent");
+        req.flash("success", 'Message sent successfully');
+        res.redirect('/dashboard')
       } else {
         throw new Error(`Unable to send message - Reason: ${status}`);
       }
     })
     .catch((error) => {
-      res.render("error", { error, returnUrl: "/dashboard" });
+      req.flash("error", error.message);
+      res.redirect('/dashboard');
     });
 });
 
